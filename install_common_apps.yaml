@@ -1,19 +1,59 @@
 ---
-
+# Playbook Start, run for all hosts, become sudo
 - hosts: all
   become: true
   tasks:
 
-  - name: Update Repo Index
+# Update the repo for Ubuntu servers
+  - name: Update Repo Index (Ubuntu)
     apt:
       update_cache: yes
+    when: ansible_distribution == "Ubuntu"
 
-  - name: Install Neofetch
+# Install Neofetch for Ubuntu
+  - name: Install Neofetch (Ubuntu)
     apt:
       name: neofetch
       state: latest
+    when: ansible_distribution == "Ubuntu"
 
-  - name: Install Net-Tools
+# Install Net-tools for Ubuntu
+  - name: Install Net-Tools (Ubuntu)
     apt:
       name: net-tools
       state: latest
+    when: ansible_distribution == "Ubuntu"
+
+# Install QEMU-Guest-Agent for Ubuntu VMs on Proxmox
+  - name: Install QEMU-Guest-Agent (Ubuntu)
+    apt:
+      name: qemu-guest-agent
+      state: latest
+    when: ansible_distribution == "Ubuntu"
+
+# Update the repo for Manjaro servers
+  - name: Update Repo Index (Manjaro)
+    pacman:
+      update_cache: yes
+    when: ansible_distribution == "Archlinux"
+
+# Install Neofetch for Manjaro
+  - name: Install Neofetch (Manjaro)
+    pacman:
+      name: neofetch
+      state: latest
+    when: ansible_distribution == "Archlinux"
+
+# Install Net-tools for Manajaro
+  - name: Install Net-Tools (Manjaro)
+    pacman:
+      name: net-tools
+      state: latest
+    when: ansible_distribution == "Archlinux"
+
+# Install QEMU-Guest-Agent for Manjaro VMs on Proxmox
+  - name: Install QEMU-Guest-Agent (Manjaro)
+    pacman:
+      name: qemu-guest-agent
+      state: latest
+    when: ansible_distribution == "Archlinux"
