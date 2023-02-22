@@ -1,0 +1,15 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Remove Neofetch
+    apt:
+      name: neofetch
+      state: absent
+
+  - name: Remove Net-Tools
+    apt:
+      name: net-tools
+      state: absent

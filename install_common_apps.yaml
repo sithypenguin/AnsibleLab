@@ -1,0 +1,19 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Update Repo Index
+    apt:
+      update_cache: yes
+
+  - name: Install Neofetch
+    apt:
+      name: neofetch
+      state: latest
+
+  - name: Install Net-Tools
+    apt:
+      name: net-tools
+      state: latest
