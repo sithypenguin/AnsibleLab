@@ -2,17 +2,22 @@
 # Playbook Start, run for all hosts, become sudo
 - hosts: all
   become: true
-  tasks:
+  pre_tasks:
 
-# Install Neofetch, net-tools, qemu, and update repo for all servers
-  - name: Install Neofetch net-tools qemu and update the repo
-    package:
-      name:
-        - "{{ neofetch_package }}"
-        - "{{ nettool_package }}"
-        - "{{ qemu_package }}"
-      state: latest
+  - name: Install updates (Manjaro)
+    pacman:
       update_cache: yes
+    when: ansible_distribution == "Archlinux"
+
+  - name: Install Updates (Ubuntu)
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: manjaro_fool2
+  become: true
+  tasks:
 
   - name: Install stuff for Ubuntu
     apt:
@@ -21,7 +26,6 @@
         - net-tools
         - qemu-guest-agent
       state: latest
-      update_cache: yes
     when: ansible_distribution == "Ubuntu"
 
   - name: Install Stuff for Manjaro
@@ -31,5 +35,4 @@
         - net-tools
         - qemu-guest-agent
       state: latest
-      update_cache: yes
     when: ansible_distribution == "Archlinux"
