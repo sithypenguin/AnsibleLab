@@ -28,6 +28,16 @@
         - bmon
         - iptraf-ng
         - iperf3
+        - realmd
+        - libnss-sss
+        - libpam-sss
+        - sssd
+        - sssd-tools
+        - adcli
+        - samba-common-bin
+        - oddjob
+        - oddjob-mkhomedir
+        - packagekit
       state: latest
       update_cache: yes
     when: ansible_distribution == "Ubuntu"
