@@ -14,12 +14,20 @@
 #      state: latest
 #      update_cache: yes
 
+  - name: Clean up repository
+    apt:
+      autoclean:
+      autoremove: 
+
   - name: Install stuff for Ubuntu
     apt:
       name:
         - neofetch
         - net-tools
         - qemu-guest-agent
+        - bmon
+        - iptraf-ng
+        - iperf3
       state: latest
       update_cache: yes
     when: ansible_distribution == "Ubuntu"
